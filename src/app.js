@@ -11,4 +11,7 @@ app.use("/api/auth", authRoutes);
 const clientRoutes = require("./routes/client.routes");
 app.use("/api/clients", clientRoutes);
 
+const invoiceRoutes = require("./routes/invoice.routes");
+app.use("/api/invoices",invoiceRoutes);
+
 module.exports = app;

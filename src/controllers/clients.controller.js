@@ -1,4 +1,4 @@
-const Client = require("../models/Client"); // Assuming Mongoose model
+const Client = require("../models/Client"); 
 
 
 /*                    ****************ALL Clients****************                     */
