@@ -1,0 +1,18 @@
+const validate = (schema) => {
+    return (req, res, next) => {
+        const { error, value } = schema.validate(req.body, {
+            abortEarly: false,  // retourner toutes les erreurs
+            stripUnknown: true  // supprimer les champs inconnus
+        });
+
+        if (error) {
+            const messages = error.details.map(d => d.message).join(', ');
+            return res.status(400).json({ message: messages });
+        }
+
+        req.body = value;
+        next();
+    };
+};
+
+module.exports = validate;

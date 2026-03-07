@@ -7,6 +7,8 @@ const {
   deleteClient,
 } = require("../controllers/clients.controller");
 const { protectRoute, checkRole } = require("../middlewares/auth");
+const validate = require("../middlewares/validate");
+const { createClientSchema, updateClientSchema } = require("../validations/client.validation");
 const router = express.Router();
 
 /**
@@ -78,7 +80,7 @@ router.get("/:id", protectRoute, getClientById);
  *       201:
  *         description: Client créé
  */
-router.post("/", protectRoute, createClient);
+router.post("/", protectRoute, validate(createClientSchema), createClient);
 
 /**
  * @swagger
@@ -100,7 +102,7 @@ router.post("/", protectRoute, createClient);
  *       404:
  *         description: Client introuvable
  */
-router.put("/:id", protectRoute, checkRole("manager", "admin"), updateClient);
+router.put("/:id", protectRoute, checkRole("manager", "admin"),validate(updateClientSchema), updateClient);
 
 /**
  * @swagger

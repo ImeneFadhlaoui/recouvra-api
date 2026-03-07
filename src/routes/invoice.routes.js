@@ -2,6 +2,8 @@ const express = require("express");
 
 const { protectRoute, checkRole } = require("../middlewares/auth");
 const { getAllInvoices, getInvoiceById, createInvoice, updateInvoice, deleteInvoice } = require("../controllers/invoice.controller");
+const validate = require("../middlewares/validate");
+const { createInvoiceSchema, updateInvoiceSchema } = require("../validations/invoice.validation");
 const router = express.Router();
 
 /**
@@ -71,7 +73,7 @@ router.get("/:id", protectRoute, getInvoiceById);
  *       404:
  *         description: Client introuvable
  */
-router.post("/", protectRoute, createInvoice);
+router.post("/", protectRoute,validate(createInvoiceSchema), createInvoice);
 
 /**
  * @swagger
@@ -91,7 +93,7 @@ router.post("/", protectRoute, createInvoice);
  *       200:
  *         description: Facture modifiée
  */
-router.put("/:id", protectRoute, checkRole("manager", "admin"), updateInvoice);
+router.put("/:id", protectRoute, checkRole("manager", "admin"), validate(updateInvoiceSchema), updateInvoice);
 
 /**
  * @swagger
