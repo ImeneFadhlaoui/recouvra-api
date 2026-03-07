@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User")
+
+
+/*                    ****************Protect Route middleware****************                     */
 const protectRoute = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
@@ -21,6 +24,7 @@ const protectRoute = async (req, res, next) => {
   }
 };
 
+/*                    ****************Check Role middleware****************                     */
 
 const checkRole = (...allowedRoles) => {
   return (req, res, next) => {
