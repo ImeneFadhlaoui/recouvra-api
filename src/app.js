@@ -19,4 +19,6 @@ app.use("/api/clients", clientRoutes);
 const invoiceRoutes = require("./routes/invoice.routes");
 app.use("/api/invoices",invoiceRoutes);
 
+const recoverytRoutes = require('./routes/recovery.routes');
+app.use("/recovery",recoverytRoutes);
 module.exports = app;
