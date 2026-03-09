@@ -96,6 +96,21 @@ router.post("/", protectRoute, validate(createClientSchema), createClient);
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *               status:
+ *                 type: string
+ *                 enum: [active, inactive, blacklisted]
  *     responses:
  *       200:
  *         description: Client modifié

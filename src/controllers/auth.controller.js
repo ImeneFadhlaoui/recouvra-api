@@ -10,7 +10,6 @@ const register = async (req, res) => {
     if (user) {
       return res.status(400).json({ message: "User already exists !" });
     }
-
     user = new User({
       name,
       email,
@@ -18,7 +17,6 @@ const register = async (req, res) => {
       role,
     });
     await user.save();
-
     const userPayload = { id: user._id, role: user.role };
     const token = jwt.sign(userPayload, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
@@ -37,7 +35,6 @@ const register = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 
 /*                    ****************Login****************                     */
 const login = async (req, res) => {
