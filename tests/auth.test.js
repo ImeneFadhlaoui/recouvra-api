@@ -1,9 +1,10 @@
+require('dotenv').config();
 const request = require('supertest');
 const app = require('../src/app');
 const mongoose = require('mongoose');
 
 beforeAll(async () => {
-    await mongoose.connect('mongodb://localhost:27017/recouvra_test');
+    await mongoose.connect(process.env.MONGODB_URI_TEST);
 });
 
 afterAll(async () => {

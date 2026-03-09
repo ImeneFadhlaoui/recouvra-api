@@ -1,3 +1,4 @@
+require('dotenv').config();
 const request = require('supertest');
 const app = require('../src/app');
 const mongoose = require('mongoose');
@@ -5,8 +6,7 @@ const mongoose = require('mongoose');
 let cookie;
 
 beforeAll(async () => {
-    await mongoose.connect('mongodb://localhost:27017/recouvra_test');
-    // Créer un user et se connecter
+    await mongoose.connect(process.env.MONGODB_URI_TEST);
     await request(app).post('/api/auth/register')
         .send({ name: 'Test', email: 'agent@test.tn', password: 'Password1', role: 'agent' });
     const res = await request(app).post('/api/auth/login')
