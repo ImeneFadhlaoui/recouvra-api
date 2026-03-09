@@ -89,9 +89,30 @@ router.post("/", protectRoute,validate(createInvoiceSchema), createInvoice);
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               amount:
+ *                 type: number
+ *                 example: 2000
+ *               dueDate:
+ *                 type: string
+ *                 format: date
+ *                 example: "2026-12-31"
+ *               description:
+ *                 type: string
+ *                 example: "Facture modifiée"
+ *               status:
+ *                 type: string
+ *                 enum: [pending, partial, paid, overdue, cancelled]
  *     responses:
  *       200:
  *         description: Facture modifiée
+ *       404:
+ *         description: Facture introuvable
  */
 router.put("/:id", protectRoute, checkRole("manager", "admin"), validate(updateInvoiceSchema), updateInvoice);
 

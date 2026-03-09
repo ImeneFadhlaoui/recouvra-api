@@ -36,6 +36,13 @@ const invoiceSchema = new Schema({
 {timestamps: true},
 );
 
+invoiceSchema.pre("save", async function () {
+  if (!this.invoiceNumber) {
+    const count = await mongoose.model('Invoice').countDocuments();
+    const year = new Date().getFullYear();
+    this.invoiceNumber = `INV-${year}-${String(count + 1).padStart(4, '0')}`;
+  }
+});
 
 const Invoice = mongoose.model('Invoice',invoiceSchema)
 module.exports= Invoice;
