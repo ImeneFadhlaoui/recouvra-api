@@ -34,3 +34,53 @@ exports.createPayment = async (req,res) =>
         res.status(500).json({message: 'Server error'});
     }
 }
+
+
+exports.getAllPayments = async (req,res) =>
+
+    {
+        try
+        {
+            const payments = await Payment.find().populate("invoice").populate("createdBy");
+            res.json(payments);
+        }
+        catch(err)
+        {
+            res.status(500).json({message: 'Server error'});
+        }
+    };
+
+exports.getPayment = async (req,res) =>
+{
+
+    try
+    {
+        const payment = await Payment.findById(req.params.id)
+                                    .populate("invoice")
+                                    .populate("createdBy");
+
+        if(!payment)
+            return res.status(404).json({message: 'payment not found'});
+        res.json(payment);
+    }
+    catch(err)
+    {
+        res.status(500).json({message: 'Server error'});
+    }
+};
+
+
+exports.deletePayment = async (req,res) =>
+{
+
+    try
+    {
+        await Payment.findByIdAndDelete(req.params.id);
+        res.json({message:'Payment deleted successfully'});
+    }
+    catch(err)
+    {
+
+        res.status(500).json({message: 'Server error'});
+    }
+}

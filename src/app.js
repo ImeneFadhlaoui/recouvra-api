@@ -21,11 +21,11 @@ app.use("/api/invoices",invoiceRoutes);
 
 
 const paymentRoutes = require('./routes/payment.route');
-app.use("/api/",paymentRoutes);
+app.use("/api",paymentRoutes);
 
 const statsRoutes = require('./routes/stats.routes');
-app.use("/api/",statsRoutes);
+app.use("/api",statsRoutes);
 
 const recoveryRoutes = require('./routes/recovery.routes');
-app.use("/api/recovery/",recoveryRoutes);
+app.use("/api/recovery",recoveryRoutes);
 module.exports = app;
