@@ -45,3 +45,5 @@ router.delete
     protectRoute,
     deleteAction
 );
+
+module.exports = router;
