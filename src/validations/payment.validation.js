@@ -3,5 +3,5 @@ exports.createPaymentSchema = joi.object
 
 ({
     amount: joi.number().positive().required(),
-    method: joi.string().valid("cash","transfer","check").default("cash")
+    method: joi.string().valid("cash","bank_transfer","check").default("cash")
 });

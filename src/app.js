@@ -24,7 +24,7 @@ const paymentRoutes = require('./routes/payment.route');
 app.use("/api",paymentRoutes);
 
 const statsRoutes = require('./routes/stats.routes');
-app.use("/api",statsRoutes);
+app.use("/api/stats",statsRoutes);
 
 const recoveryRoutes = require('./routes/recovery.routes');
 app.use("/api/recovery",recoveryRoutes);

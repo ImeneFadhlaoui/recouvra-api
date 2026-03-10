@@ -8,6 +8,8 @@ exports.createPayment = async (req,res) =>
         const invoice = await Invoice.findById(req.params.id);
         if (!invoice)
             return res.status(404).json({message: 'cant create, invoice not found'});
+        if (invoice.amountPaid + req.body.amount > invoice.amount)
+            return res.status(400).json({ message: 'Payment exceeds invoice amount' });
         const payment = await Payment.create
         (
             {
@@ -17,8 +19,6 @@ exports.createPayment = async (req,res) =>
                 createdBy: req.user.id
             }
         );
-        if(invoice.amountPaid + payment.amount > invoice.amount)
-            return res.status(400).json({message: 'Payment exceeds invoice amount'});
 
         invoice.amountPaid += payment.amount;
 
@@ -27,11 +27,11 @@ exports.createPayment = async (req,res) =>
             ? "paid"
             : "partial";
         await invoice.save()
-        res.json(payment)
+        res.status(201).json(payment)
     }
     catch(err)
     {
-        res.status(500).json({message: 'Server error'});
+        res.status(500).json({message: 'Server error',error: err.message});
     }
 }
 
@@ -61,7 +61,7 @@ exports.getPayment = async (req,res) =>
 
         if(!payment)
             return res.status(404).json({message: 'payment not found'});
-        res.json(payment);
+        res.status(200).json(payment);
     }
     catch(err)
     {
@@ -76,7 +76,7 @@ exports.deletePayment = async (req,res) =>
     try
     {
         await Payment.findByIdAndDelete(req.params.id);
-        res.json({message:'Payment deleted successfully'});
+        res.status(200).json({message:'Payment deleted successfully'});
     }
     catch(err)
     {

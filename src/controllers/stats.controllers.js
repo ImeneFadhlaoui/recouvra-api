@@ -32,7 +32,7 @@ exports.getStats = async(req,res) =>
         ({
             totalClients,
             totalInvoices,
-            unpaidInvoicesm,
+            unpaidInvoices,
             paidInvoices,
             partialInvoices,
             recoveredAmount

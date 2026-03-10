@@ -18,7 +18,7 @@ const { protectRoute } = require('../middlewares/auth');
 
 router.get
 (
-    "/stats/",
+    "/",
     protectRoute,
     getStats
 );
