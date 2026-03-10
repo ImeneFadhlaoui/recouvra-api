@@ -78,6 +78,7 @@ PORT=3000
 MONGODB_URI=mongodb://localhost:27017/recouvra
 MONGODB_URI_TEST=mongodb://localhost:27017/recouvra_test
 JWT_SECRET=your_secret_key
+JWT_EXPIRES_IN=1h
 ```
 
 4. Run the server
