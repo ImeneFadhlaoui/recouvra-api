@@ -33,8 +33,6 @@ const { protectRoute } = require('../middlewares/auth');
  *               type:
  *                 type: string
  *                 example: call
- *               note:
- *                 type: string
  *     responses:
  *       201:
  *         description: Action créée
