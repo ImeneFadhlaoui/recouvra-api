@@ -5,7 +5,7 @@ const { protectRoute } = require('../middlewares/auth');
 
 /**
  * @swagger
- * /stats/stats:
+ * /stats/:
  *   get:
  *     summary: Obtenir les statistiques globales
  *     tags: [Statistics]
